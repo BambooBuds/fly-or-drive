@@ -1,4 +1,4 @@
-angular.module('app').directive('fly', function(calculationFactory) {
+angular.module('app').directive('flyOrDrive', function(calculationFactory) {
   return {
     restrict: "AE",
     scope: {},
