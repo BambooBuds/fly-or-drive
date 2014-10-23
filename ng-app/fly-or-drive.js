@@ -65,6 +65,6 @@ angular.module('app').directive('fly', function(calculationFactory) {
       
       scope.calculations = calculationFactory.getAll();
     },
-    templateUrl: "fly-or-drive_main.html"
+    templateUrl: "ng-app/fly-or-drive_main.html"
   };
 });
