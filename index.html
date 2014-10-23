@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="app" lang="en">
   <head>
     <meta charset="utf-8">
     <title>Template &middot; Bootstrap</title>
@@ -10,6 +10,9 @@
     <script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="style.css" />
+    <script scr="ng-app/app.js"></script>
+    <script scr="ng-app/calculation-service.js"></script>
+    <script scr="ng-app/fly-or-drive.js"></script>
     <!-- Le styles -->
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -43,30 +46,7 @@
         </div><!-- /.navbar -->
       </div>
 
-      <!-- Jumbotron -->
-      <div class="jumbotron">
-        <h2>Fly, Drive, or Take a Tesla?</h2>
-        <p class="lead">Whoops, looks like you stumbled across this while we're still trying to get everything setup! Please check back with us soon, or check out some of our other great stuff on our blog!</p>
-        <a class="btn btn-large btn-success" href="#">Calculate</a>
-      </div>
-
-      <hr>
-
-      <!-- Example row of columns -->
-      <div class="row-fluid">
-        <div class="span4">
-          <h2>Past Calculation - 1</h2>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
-        <div class="span4">
-          <h2>Past Calculation - 2</h2>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-       </div>
-        <div class="span4">
-          <h2>Past Calculation - 3</h2>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
-      </div>
+      <fly-or-drive></fly-or-drive>
 
       <hr>
 
