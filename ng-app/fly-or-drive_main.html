@@ -2,7 +2,38 @@
 <div class="jumbotron">
   <h2>Fly, Drive, or Take a Tesla?</h2>
   <p class="lead">Whoops, looks like you stumbled across this while we're still trying to get everything setup! Please check back with us soon, or check out some of our other great stuff on our blog!</p>
-  <a class="btn btn-large btn-success" href="#">Calculate</a>
+  <form role="form">
+  <div class="form-group">
+    <label for="userInput_Miles">Miles To Be Travelled</label>
+    <input type="text" class="form-control" id="userInput_Miles" placeholder="Enter Miles" ng-model="miles">
+  </div>
+  <div class="form-group">
+    <label for="userInput_FlyingTime">Amount Of Time It Takes To Fly</label>
+    <input type="text" class="form-control" id="userInput_FlyingTime" placeholder="Enter Flight Time" ng-model="flyingTime">
+  </div>
+  <div class="form-group">
+    <label for="userInput_MPG">MPG/MPGE</label>
+    <input type="text" class="form-control" id="userInput_MPG" placeholder="Enter MPG/MPGE" ng-model="mpg">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="electricVehicle"> Car Is Electric Vehicle?
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="userInput_HourValue">Value of Person Hour</label>
+    <input type="text" class="form-control" id="userInput_HourValue" placeholder="Enter Value of One of Your Hours" ng-model="valueOfPersonHour">
+  </div>
+  <div class="form-group">
+    <label for="userInput_Travelers">Number Of Travelers</label>
+    <input type="text" class="form-control" id="userInput_Travelers" placeholder="Enter Number Of Travelers" ng-model="numberOfTravelers">
+  </div>
+</form>
+  <span>Flying CO2: {{flyingCO2()}}</span>
+  <span>Input Vehicle(?) CO2: {{inputVehicleCO2()}}</span>
+  <span>Car With 25MPG CO2: {{mpg25CO2()}}</span>
+  <span>Car With 50MPG CO2: {{mpg50CO2()}}</span>
+  <span>Tesla Model S CO2: {{teslaCO2()}}</span>
 </div>
 
 <hr>
