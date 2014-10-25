@@ -52,9 +52,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="output in generateOutputs(miles, fare, flyingTime, mpg_e, electricVehicle, valueOfPersonHour, numberOfTravelers)">
+            <tr ng-repeat="output in generateOutputs(miles, fare, flyingTime, mpg_e, electricVehicle, valueOfPersonHour, numberOfTravelers)" ng-class="info: output.style.best, danger: output.style.worst, success: output.style.eco">
               <td>{{output.title}}</td>
-              <td>{{output.gas + output.depreciation + output.fare + output.electricity + output.time + output.carbon | currency}}</td>
+              <td>{{outputTotal(output) | currency}}</td>
               <td>{{output.gas | currency}}</td>
               <td>{{output.depreciation | currency}}</td>
               <td>{{output.fare | currency}}</td>
