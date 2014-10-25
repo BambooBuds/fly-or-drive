@@ -1,6 +1,7 @@
 <!-- Jumbotron -->
 <div class="jumbotron">
   <h2>Fly, Drive, or Take a Tesla?</h2>
+  <div class="row"></div>
   <form role="form">
     <div class="form-group">
       <label for="userInput_Miles">Total Miles To Be Travelled</label>
@@ -19,7 +20,7 @@
       <label for="userInput_MPG">MPG/MPGE Of Car You Would Take</label>
       <input type="text" class="form-control" id="userInput_MPG" placeholder="Enter MPG/MPGE" ng-model="mpg_e">
     </div>
-    <div class="form-group checkbox">
+    <div class="form-group">
       <label>
         <input type="checkbox" ng-model="electricVehicle">Does The Car You Would Take Electric Require Being Plugged In?
       </label>
@@ -33,6 +34,7 @@
       <input type="text" class="form-control" id="userInput_Travelers" placeholder="Enter Number Of Travelers" ng-model="numberOfTravelers">
     </div>
   </form>
+  <div class="row"></div>
   <button type="button" disabled="true" class="btn btn-lrg btn-warning" ng-if="!allInputsNonNull()">Please Fill In All Inputs To Display Calculator</button>
   <div ng-if="allInputsNonNull()" class="animate-if">
     <calculator miles="miles" fare="fare" flight-len="flyingTime" mpg-e="mpg_e" elec="electricVehicle" hour-val="valueOfPersonHour" num-pass="numberOfTravelers"></calculator>
