@@ -140,6 +140,6 @@ angular.module('app').directive('flyOrDrive', function(calculationFactory) {
       
       scope.calcs = calculationFactory.getAll();
     },
-    templateUrl: "fly-or-drive_main.html"
+    templateUrl: "ng-app/fly-or-drive_main.html"
   };
 });
