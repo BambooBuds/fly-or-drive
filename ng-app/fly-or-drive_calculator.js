@@ -11,7 +11,7 @@ angular.module('app').directive('calculator', function(calculationFactory) {
       numberOfTravelers : "&numPass",
     },
     link: function(scope, elem, attrs){
-      index = 0;
+      curr_index = 0;
       internal_outputs = [];
       // ADVANCED INPUTS
       CO2perKWH = 1.52;
@@ -31,11 +31,11 @@ angular.module('app').directive('calculator', function(calculationFactory) {
         
         // To get around angular's dirty checking of hashkeys, we reuse values
         ret = { style: {}};
-        if(internal_outputs.length >= (index + 1)) {
-          ret = internal_outputs[index];
+        if(internal_outputs.length >= (curr_index + 1)) {
+          ret = internal_outputs[curr_index];
           console.log("found value");
           console.log(ret);
-          index++;
+          curr_index++;
         }
         ret.title = title;
         ret.gas = g;
