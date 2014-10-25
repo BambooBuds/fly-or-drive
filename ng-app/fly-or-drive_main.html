@@ -1,11 +1,10 @@
 <!-- Jumbotron -->
 <div class="jumbotron">
   <h2>Fly, Drive, or Take a Tesla?</h2>
-  <p class="lead">Whoops, looks like you stumbled across this while we're still trying to get everything setup! Please check back with us soon, or check out some of our other great stuff on our blog!</p>
   <form role="form">
     <div class="form-group">
-      <label for="userInput_Miles">Miles To Be Travelled</label>
-      <button type="button" class="btn-info btn-xs" ng-click="miles = miles * 2">Round Trip</button>
+      <label for="userInput_Miles">Total Miles To Be Travelled</label>
+      <button type="button" class="btn-info btn-xs" ng-click="miles = miles * 2">Make Round Trip</button>
       <input type="text" class="form-control" id="userInput_Miles" placeholder="Enter Miles" ng-model="miles">
     </div>
     <div class="form-group">
@@ -13,28 +12,28 @@
       <input type="text" class="form-control" id="userInput_Fare" placeholder="Enter Fare" ng-model="fare">
     </div>
     <div class="form-group">
-      <label for="userInput_FlyingTime">Amount Of Time It Takes To Fly</label>
+      <label for="userInput_FlyingTime">Amount Of Time It Takes To Fly (Include travel to airport, security, and picking up your favourite latte)</label>
       <input type="text" class="form-control" id="userInput_FlyingTime" placeholder="Enter Flight Time" ng-model="flyingTime">
     </div>
     <div class="form-group">
-      <label for="userInput_MPG">MPG/MPGE</label>
+      <label for="userInput_MPG">MPG/MPGE Of Car You Would Take</label>
       <input type="text" class="form-control" id="userInput_MPG" placeholder="Enter MPG/MPGE" ng-model="mpg_e">
     </div>
-    <div class="checkbox">
+    <div class="form-group checkbox">
       <label>
-        <input type="checkbox" ng-model="electricVehicle"> Car Is Electric Vehicle?
+        <input type="checkbox" ng-model="electricVehicle">Does The Car You Would Take Electric Require Being Plugged In?
       </label>
     </div>
     <div class="form-group">
-      <label for="userInput_HourValue">Value of Person Hour</label>
+      <label for="userInput_HourValue">How Much Would You Say Your Time Is Worth?r</label>
       <input type="text" class="form-control" id="userInput_HourValue" placeholder="Enter Value of One of Your Hours" ng-model="valueOfPersonHour">
     </div> 
     <div class="form-group">
-      <label for="userInput_Travelers">Number Of Travelers</label>
+      <label for="userInput_Travelers">Number Of Travelers In Your Entourage</label>
       <input type="text" class="form-control" id="userInput_Travelers" placeholder="Enter Number Of Travelers" ng-model="numberOfTravelers">
     </div>
   </form>
-  <button type="button" class="btn btn-lrg btn-warning" ng-if="!allInputsNonNull()">Please Fill In All Inputs To Display Calculator</button>
+  <button type="button" disabled="true" class="btn btn-lrg btn-warning" ng-if="!allInputsNonNull()">Please Fill In All Inputs To Display Calculator</button>
   <div ng-if="allInputsNonNull()" class="animate-if">
     <calculator miles="miles" fare="fare" flight-len="flyingTime" mpg-e="mpg_e" elec="electricVehicle" hour-val="valueOfPersonHour" num-pass="numberOfTravelers"></calculator>
   </div>
