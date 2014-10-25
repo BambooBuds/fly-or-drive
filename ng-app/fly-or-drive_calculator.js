@@ -51,7 +51,7 @@ angular.module('app').directive('calculator', function(calculationFactory) {
       scope.generateOutputs = function() {
         curr_index = 0;
         humanCostPerHour = scope.valueOfPersonHour() * scope.numberOfTravelers();
-        carTravelTime = ((scope.miles() / 60) + Math.floor(scope.miles() / 1440)) * 12;
+        carTravelTime = (scope.miles() / 60) + (Math.floor(scope.miles() / 1440) * 12);
         outputs = [];
         outputs.push(createOutput(
           "Flying",
@@ -66,7 +66,7 @@ angular.module('app').directive('calculator', function(calculationFactory) {
           (scope.electricVehicle()) ? 0 : ((scope.miles() / scope.mpg_e()) * CostOfFuel),
           (scope.miles() * DeprecationMainenecePerMile_nonTesla),
           0,
-          (scope.electricVehicle()) ? 10 : 0,
+          (scope.electricVehicle()) ? (scope.miles() / scope.mpg_e) * CostPerKWH : 0,
           carTravelTime * humanCostPerHour,
           (scope.miles() / scope.mpg_e()) * (scope.electricVehicle() ? (33.7 * CO2perKWH) : CO2perGallonGas)));
         outputs.push(createOutput(
