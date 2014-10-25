@@ -3,13 +3,16 @@ angular.module('app').directive('flyOrDrive', function(calculationFactory) {
     restrict: "AE",
     scope: {},
     link: function(scope, elem, attrs){
+      scope.calcs = [];
+      
       // USER INPUTS
-      scope.miles = 0;
-      scope.flyingTime = 0;
-      scope.mpg = 0;
+      scope.miles = null;
+      scope.fare = null;
+      scope.flyingTime = null;
+      scope.mpg_e = null;
       scope.electricVehicle = false;
-      scope.valueOfPersonHour = 0;
-      scope.numberOfTravelers = 0;
+      scope.valueOfPersonHour = null;
+      scope.numberOfTravelers = null;
       
       // ADVANCED INPUTS
       CO2perKWH = 1.52;
@@ -18,30 +21,78 @@ angular.module('app').directive('flyOrDrive', function(calculationFactory) {
       CostPerKWH = 0.122;
       CostOffsetting1TonOfCarbon = 14;
       DeprecationMainenecePerMile_nonTesla = 0.1;
-      DeprecationMainenecePerMile_nonTesla = 0.3;
+      DeprecationMainenecePerMile_Tesla = 0.3;
       
-      scope.flyingCO2 = function() {
-        p = 0;
-        if(scope.miles < 4000) {
-          p = (4000 - scope.miles) / 4000*0.54;
-        }
-        return p + scope.numberOfTravelers*scope.miles*1.08;
+      nn = function(x) {
+        return x !== null;
+      }
+      
+      scope.allInputsNonNull = function() {
+        return nn(scope.miles) && nn(scope.fare) && nn(scope.flyingTime) && nn(scope.mpg_e) && nn(scope.valueOfPersonHour) && nn(scope.numberOfTravelers);
+      }
+      
+      createOutput = function(title, g, d, f, e, t, c) {
+        carbon = (c / 2000) * CostOffsetting1TonOfCarbon;
+        
+        ret = {
+          title: title,
+          gas : g,
+          depreciation : d,
+          fare : f,
+          electricity : e,
+          time : t,
+          carbon : carbon
+        };
+        return ret;
       };
-      scope.inputVehicleCO2 = function() {
-        m = CO2perGallonGas;
-        if(scope.electricVehicle) {
-          m = 33.7 * CO2perKWH;
-        }
-        return (scope.miles / scope.mpg) * m;
-      };
-      scope.mpg25CO2 = function() {
-        return CO2perGallonGas * (scope.miles / 25);
-      };
-      scope.mpg50CO2 = function() {
-        return CO2perGallonGas * (scope.miles / 50);
-      };
-      scope.teslaCO2 = function() {
-        return 33.7 * CO2perKWH * (scope.miles / 89)
+      
+      scope.generateOutputs = function(miles, fare, flyingTime, mpg_e, electricVehicle, valueOfPersonHour, numberOfTravelers) {
+        humanCostPerHour = valueOfPersonHour * numberOfTravelers;
+        carTravelTime = ((miles / 60) + Math.floor(miles / 1440)) * 12;
+        outputs = [];
+        outputs.push(createOutput(
+          "Flying",
+          0,
+          0,
+          (fare * numberOfTravelers),
+          0,
+          (flyingTime * humanCostPerHour),
+          (((miles < 4000) ? ((4000 - miles) / 4000*0.54) : 0) + (numberOfTravelers * miles * 1.08))));
+        outputs.push(createOutput(
+          "Driving - Input Vehicle",
+          (electricVehicle) ? 0 : ((miles / mpg_e) * CostOfFuel),
+          (miles * DeprecationMainenecePerMile_nonTesla),
+          0,
+          (electricVehicle) ? 10 : 0,
+          carTravelTime * humanCostPerHour,
+          (miles / mpg_e) * (electricVehicle ? (33.7 * CO2perKWH) : CO2perGallonGas)));
+        outputs.push(createOutput(
+          "Driving 25 MPG Car",
+          (miles / 25) * CostOfFuel,
+          (miles * DeprecationMainenecePerMile_nonTesla),
+          0,
+          0,
+          carTravelTime * humanCostPerHour,
+          CO2perGallonGas * (miles / 25)));
+        outputs.push(createOutput(
+          "Driving 50 MPG Car",
+          (miles / 50) * CostOfFuel,
+          (miles * DeprecationMainenecePerMile_nonTesla),
+          0,
+          0,
+          carTravelTime * humanCostPerHour,
+          CO2perGallonGas * (miles / 50)));
+        outputs.push(createOutput(
+          "Driving Tesla Model S",
+          0,
+          (miles * DeprecationMainenecePerMile_Tesla),
+          0,
+          (miles / 89) * 33.7 * CostPerKWH,
+          (carTravelTime + (Math.floor(miles / 530) * 2)) * humanCostPerHour,
+          33.7 * CO2perKWH * (miles / 89)));
+          
+        console.log(outputs);
+        return outputs;
       };
       
       scope.save = function() {
@@ -50,7 +101,7 @@ angular.module('app').directive('flyOrDrive', function(calculationFactory) {
           
           calc.title = scope.title;
           calc.id = scope.index != -1 ? scope.index : localStorage.length;
-          scope.calculations = calculationFactory.put(calc);
+          scope.calcs = calculationFactory.put(calc);
         }
       };
       
@@ -60,11 +111,11 @@ angular.module('app').directive('flyOrDrive', function(calculationFactory) {
           indexToDelete = scope.index;
         }
         
-        scope.calculations = calculationFactory.remove(indexToDelete);
+        scope.calcs = calculationFactory.remove(indexToDelete);
       };
       
-      scope.calculations = calculationFactory.getAll();
+      scope.calcs = calculationFactory.getAll();
     },
-    templateUrl: "ng-app/fly-or-drive_main.html"
+    templateUrl: "fly-or-drive_main.html"
   };
 });
