@@ -25,10 +25,14 @@ angular.module('app').directive('flyOrDrive', function(calculationFactory) {
       
       nn = function(x) {
         return x !== null;
-      }
+      };
       
       scope.allInputsNonNull = function() {
         return nn(scope.miles) && nn(scope.fare) && nn(scope.flyingTime) && nn(scope.mpg_e) && nn(scope.valueOfPersonHour) && nn(scope.numberOfTravelers);
+      };
+      
+      scope.outputTotal = function(output) {
+        return output.gas + output.depreciation + output.fare + output.electricity + output.time + output.carbon;
       }
       
       createOutput = function(title, g, d, f, e, t, c) {
@@ -41,7 +45,8 @@ angular.module('app').directive('flyOrDrive', function(calculationFactory) {
           fare : f,
           electricity : e,
           time : t,
-          carbon : carbon
+          carbon : carbon,
+          style : {best : false, worst : false, eco : false}
         };
         return ret;
       };
@@ -90,7 +95,26 @@ angular.module('app').directive('flyOrDrive', function(calculationFactory) {
           (miles / 89) * 33.7 * CostPerKWH,
           (carTravelTime + (Math.floor(miles / 530) * 2)) * humanCostPerHour,
           33.7 * CO2perKWH * (miles / 89)));
-          
+        
+        bestVal_ind = 0;
+        worstVal_ind = 0;
+        mostEcoFriendly_ind = 0;
+        
+        for(i = 1; i < outputs.length; i++) {
+          if(scope.outputTotal(outputs[i]) < scope.outputTotal(outputs[bestVal_ind])) {
+            bestVal_ind = i;
+          } else if(scope.outputTotal(outputs[worstVal_ind]) < scope.outputTotal(outputs[i])) {
+            worstVal_ind = i;
+          }
+          if(outputs[i].carbon < outputs[mostEcoFriendly_ind].carbon) {
+            mostEcoFriendly_ind = i;
+          }
+        }
+        
+        outputs[bestVal_ind].style.best = true;
+        outputs[worstVal_ind].style.worst = true;
+        outputs[mostEcoFriendly_ind].style.eco = true;
+        
         console.log(outputs);
         return outputs;
       };
