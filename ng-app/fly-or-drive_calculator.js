@@ -16,11 +16,11 @@ angular.module('app').directive('calculator', function(calculationFactory) {
       // ADVANCED INPUTS
       CO2perKWH = 1.52;
       CO2perGallonGas = 19.64;
-      CostOfFuel = 3.55;
-      CostPerKWH = 0.122;
+      CostOfFuel = 3.12;
+      CostPerKWH = 0.1092;
       CostOffsetting1TonOfCarbon = 14;
-      DeprecationMainenecePerMile_nonTesla = 0.1;
-      DeprecationMainenecePerMile_Tesla = 0.3;
+      DeprecationMainenecePerMile_nonTesla = 0.12;
+      DeprecationMainenecePerMile_Tesla = 0.36;
       
       scope.outputTotal = function(output) {
         return output.gas + output.depreciation + output.fare + output.electricity + output.time + output.carbon;
