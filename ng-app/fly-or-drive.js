@@ -19,7 +19,7 @@ angular.module('app').directive('flyOrDrive', function(calculationFactory) {
       };
       
       scope.allInputsNonNull = function() {
-        return true; //nn(scope.miles) && nn(scope.fare) && nn(scope.flyingTime) && nn(scope.mpg_e) && nn(scope.valueOfPersonHour) && nn(scope.numberOfTravelers);
+        return nn(scope.miles) && nn(scope.fare) && nn(scope.flyingTime) && nn(scope.mpg_e) && nn(scope.valueOfPersonHour) && nn(scope.numberOfTravelers);
       };
 
       scope.save = function() {
