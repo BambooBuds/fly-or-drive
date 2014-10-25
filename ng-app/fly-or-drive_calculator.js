@@ -63,10 +63,10 @@ angular.module('app').directive('calculator', function(calculationFactory) {
           (((scope.miles() < 1400) ? (((1400 - scope.miles()) / 1400)*0.54) : 0) + (scope.numberOfTravelers() * scope.miles() * 1.08))));
         outputs.push(createOutput(
           "Driving - Input Vehicle",
-          (scope.electricVehicle()) ? 0 : ((scope.miles() / scope.mpg_e()) * CostOfFuel),
+          scope.electricVehicle() ? 0 : ((scope.miles() / scope.mpg_e()) * CostOfFuel),
           (scope.miles() * DeprecationMainenecePerMile_nonTesla),
           0,
-          (scope.electricVehicle()) ? (scope.miles() / scope.mpg_e()) * CostPerKWH : 0,
+          scope.electricVehicle() ? (scope.miles() / scope.mpg_e()) * 33.7 * CostPerKWH : 0,
           carTravelTime * humanCostPerHour,
           (scope.miles() / scope.mpg_e()) * (scope.electricVehicle() ? (33.7 * CO2perKWH) : CO2perGallonGas)));
         outputs.push(createOutput(
