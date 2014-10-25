@@ -36,36 +36,7 @@
   </form>
   <button type="button" class="btn btn-lrg btn-warning" ng-if="!allInputsNonNull()">Please Fill In All Inputs To Display Calculator</button>
   <div ng-if="allInputsNonNull()" class="animate-if">
-    <div class="row">
-      <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>Transportation</th>
-              <th>Total</th>
-              <th>Gas</th>
-              <th>Depreciation</th>
-              <th>Fare</th>
-              <th>Electricity</th>
-              <th>Time</th>
-              <th>Carbon</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="output in generateOutputs(miles, fare, flyingTime, mpg_e, electricVehicle, valueOfPersonHour, numberOfTravelers)" ng-class="info: output.style.best, danger: output.style.worst, success: output.style.eco">
-              <td>{{output.title}}</td>
-              <td>{{outputTotal(output) | currency}}</td>
-              <td>{{output.gas | currency}}</td>
-              <td>{{output.depreciation | currency}}</td>
-              <td>{{output.fare | currency}}</td>
-              <td>{{output.electricity | currency}}</td>
-              <td>{{output.time | currency}}</td>
-              <td>{{output.carbon | currency}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <calculator miles="miles" fare="fare" flight-len="flyingTime" mpg-e="mpg_e" elec="electricVehicle" hour-val="valueOfPersonHour" num-pass="numberOfTravelers"></calculator>
   </div>
 </div>
 
