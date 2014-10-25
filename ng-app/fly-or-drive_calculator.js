@@ -33,8 +33,6 @@ angular.module('app').directive('calculator', function(calculationFactory) {
         ret = { style: {}};
         if(internal_outputs.length >= (curr_index + 1)) {
           ret = internal_outputs[curr_index];
-          console.log("found value");
-          console.log(ret);
           curr_index++;
         }
         ret.title = title;
