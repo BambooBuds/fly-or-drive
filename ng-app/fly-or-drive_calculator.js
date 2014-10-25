@@ -113,7 +113,6 @@ angular.module('app').directive('calculator', function(calculationFactory) {
         outputs[worstVal_ind].style.worst = true;
         outputs[mostEcoFriendly_ind].style.eco = true;
 
-        console.log(outputs);
         internal_outputs = outputs;
         return outputs;
       };
