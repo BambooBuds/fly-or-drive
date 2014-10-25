@@ -60,7 +60,7 @@ angular.module('app').directive('calculator', function(calculationFactory) {
           (scope.fare() * scope.numberOfTravelers()),
           0,
           (scope.flyingTime() * humanCostPerHour),
-          (((scope.miles() < 4000) ? ((4000 - scope.miles()) / 4000*0.54) : 0) + (scope.numberOfTravelers() * scope.miles() * 1.08))));
+          (((scope.miles() < 1400) ? (((1400 - scope.miles()) / 1400)*0.54) : 0) + (scope.numberOfTravelers() * scope.miles() * 1.08))));
         outputs.push(createOutput(
           "Driving - Input Vehicle",
           (scope.electricVehicle()) ? 0 : ((scope.miles() / scope.mpg_e()) * CostOfFuel),
