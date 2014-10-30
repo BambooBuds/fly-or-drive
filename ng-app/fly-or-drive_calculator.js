@@ -67,7 +67,7 @@ angular.module('app').directive('calculator', function(calculationFactory) {
           (scope.miles() * DeprecationMainenecePerMile_nonTesla),
           0,
           scope.electricVehicle() ? (scope.miles() / scope.mpg_e()) * 33.7 * CostPerKWH : 0,
-          (carTravelTime + (scope.electricVehicle ? (Math.floor(scope.miles() / 530) * 2) : 0)) * humanCostPerHour
+          (carTravelTime + (scope.electricVehicle ? (Math.floor(scope.miles() / 530) * 2) : 0)) * humanCostPerHour,
           (scope.miles() / scope.mpg_e()) * (scope.electricVehicle() ? (33.7 * CO2perKWH) : CO2perGallonGas)));
         outputs.push(createOutput(
           "Driving 25 MPG Car",
